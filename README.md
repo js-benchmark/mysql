@@ -14,17 +14,26 @@
 [01_insert.js](benchmark/01_insert.js)
 ```
 mysql insert
-  insert with_id ................................. 131 op/s
-  insert with_guid ............................... 75 op/s
-  insert with_timestamp .......................... 123 op/s
-  insert with_datetime ........................... 66 op/s
+  insert with_id ................................. 140 op/s
+  insert with_guid ............................... 68 op/s
+  insert with_timestamp .......................... 125 op/s
+  insert with_datetime ........................... 65 op/s
 ```
 
 [02_select.js](benchmark/02_select.js)
 ```
 mysql select
-  select with_timestamp .......................... 538 op/s
-  select with_datetime ........................... 430 op/s
+  select with_timestamp .......................... 568 op/s
+  select with_datetime ........................... 490 op/s
+```
+
+[03_char_vs_varchar.js](benchmark/03_char_vs_varchar.js)
+```
+mysql insert
+  insert with_char ............................... 97 op/s
+  insert with_varchar ............................ 95 op/s
+  select with_char ............................... 321 op/s
+  select with_varchar ............................ 282 op/s
 ```
 
 # contribute

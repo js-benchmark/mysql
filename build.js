@@ -26,6 +26,7 @@ const benchmarkBlockTemplate = _.template(multiline(() => {
 const result = [];
 
 allBenchmarks.forEach((fileName) => {
+  console.log(`Staring ${fileName}`);
   let output = execSync(`${matchaCommand} -R plain ./benchmark/${fileName}`).toString();
 
   // remove unnecessary output

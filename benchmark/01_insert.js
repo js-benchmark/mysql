@@ -14,23 +14,21 @@ suite('mysql insert', () => {
   set('delay', 100);
 
   before(async () => {
-    const sqlCreate1 = 'CREATE TABLE IF NOT EXISTS `with_id` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT,`param` int(11) unsigned NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-    const sqlCreate2 = 'CREATE TABLE IF NOT EXISTS `with_guid` (`id` char(40) NOT NULL DEFAULT \'\',`param` int(11) unsigned NOT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-    const sqlCreate3 = 'CREATE TABLE IF NOT EXISTS `with_timestamp` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT,`timestamp` int(10) unsigned DEFAULT NULL,PRIMARY KEY (`id`),KEY `timestamp`(`timestamp`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-    const sqlCreate4 = 'CREATE TABLE IF NOT EXISTS `with_datetime` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT,`datetime` datetime NOT NULL,PRIMARY KEY (`id`),KEY `datetime` (`datetime`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-    const sqlTruncate1 = 'TRUNCATE TABLE `with_id`;';
-    const sqlTruncate2 = 'TRUNCATE TABLE `with_guid`;';
-    const sqlTruncate3 = 'TRUNCATE TABLE `with_timestamp`;';
-    const sqlTruncate4 = 'TRUNCATE TABLE `with_datetime`;';
     connection.connect();
-    await query(connection, sqlCreate1);
-    await query(connection, sqlCreate2);
-    await query(connection, sqlCreate3);
-    await query(connection, sqlCreate4);
-    await query(connection, sqlTruncate1);
-    await query(connection, sqlTruncate2);
-    await query(connection, sqlTruncate3);
-    await query(connection, sqlTruncate4);
+    const sqlCreate = [
+      'CREATE TABLE IF NOT EXISTS `with_id` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT,`param` int(11) unsigned NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+      'CREATE TABLE IF NOT EXISTS `with_guid` (`id` char(40) NOT NULL DEFAULT \'\',`param` int(11) unsigned NOT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+      'CREATE TABLE IF NOT EXISTS `with_timestamp` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT,`timestamp` int(10) unsigned DEFAULT NULL,PRIMARY KEY (`id`),KEY `timestamp`(`timestamp`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+      'CREATE TABLE IF NOT EXISTS `with_datetime` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT,`datetime` datetime NOT NULL,PRIMARY KEY (`id`),KEY `datetime` (`datetime`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;'
+    ].map(x => query(connection, x));
+    const sqlTruncate = [
+      'with_id',
+      'with_guid',
+      'with_timestamp',
+      'with_datetime'
+    ].map(x => query(connection, `TRUNCATE TABLE \`${x}\`;`));
+    await Promise.all(sqlCreate);
+    await Promise.all(sqlTruncate);
   });
 
   bench('insert with_id', (next) => {
