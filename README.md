@@ -14,9 +14,11 @@
 [01_insert.js](benchmark/01_insert.js)
 ```
 mysql insert
-  node-uuid ...................................... 62,271 op/s
-  insert with_guid ............................... 85 op/s
-  insert with_id ................................. 250 op/s
+  node-uuid ...................................... 58,475 op/s
+  insert with_id ................................. 251 op/s
+  insert with_guid ............................... 88 op/s
+  insert with_timestamp .......................... 138 op/s
+  insert with_datetime ........................... 68 op/s
 ```
 
 # contribute
