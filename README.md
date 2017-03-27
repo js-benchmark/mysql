@@ -14,11 +14,17 @@
 [01_insert.js](benchmark/01_insert.js)
 ```
 mysql insert
-  node-uuid ...................................... 58,475 op/s
-  insert with_id ................................. 251 op/s
-  insert with_guid ............................... 88 op/s
-  insert with_timestamp .......................... 138 op/s
-  insert with_datetime ........................... 68 op/s
+  insert with_id ................................. 131 op/s
+  insert with_guid ............................... 75 op/s
+  insert with_timestamp .......................... 123 op/s
+  insert with_datetime ........................... 66 op/s
+```
+
+[02_select.js](benchmark/02_select.js)
+```
+mysql insert
+  select with_timestamp .......................... 538 op/s
+  select with_datetime ........................... 430 op/s
 ```
 
 # contribute

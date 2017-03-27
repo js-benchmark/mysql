@@ -8,7 +8,7 @@ const connection = mysql.createConnection(config);
 Date.prototype.format = format;
 
 suite('mysql insert', () => {
-  set('iterations', 100);
+  set('iterations', 1000);
   set('concurrency', 1);
   set('type', 'static');
   set('delay', 100);
@@ -33,13 +33,10 @@ suite('mysql insert', () => {
     await query(connection, sqlTruncate4);
   });
 
-  bench('node-uuid', () => {
-    uuid();
-  });
-
   bench('insert with_id', (next) => {
     let sql = 'INSERT INTO `with_id`(param) VALUES ';
     for (let i = 0; i < 1000; i += 1) {
+      uuid(); // 公平耗时
       sql += `(${i})`;
       if (i !== 999) {
         sql += ',';
