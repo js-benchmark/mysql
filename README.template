@@ -11,13 +11,7 @@
 
 # benchmark
 
-[01_insert.js](benchmark/01_insert.js)
-```
-mysql insert
-  node-uuid ...................................... 62,271 op/s
-  insert with_guid ............................... 85 op/s
-  insert with_id ................................. 250 op/s
-```
+<%= benchmark_result %>
 
 # contribute
 
