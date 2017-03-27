@@ -22,7 +22,7 @@ mysql insert
 
 [02_select.js](benchmark/02_select.js)
 ```
-mysql insert
+mysql select
   select with_timestamp .......................... 538 op/s
   select with_datetime ........................... 430 op/s
 ```

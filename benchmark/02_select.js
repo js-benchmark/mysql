@@ -6,7 +6,7 @@ const connection = mysql.createConnection(config);
 /* eslint no-extend-native:0 */
 Date.prototype.format = format;
 
-suite('mysql insert', () => {
+suite('mysql select', () => {
   set('iterations', 1000);
   set('concurrency', 1);
   set('type', 'static');
